@@ -1,6 +1,7 @@
 package spruce
 
 import (
+	"crypto/md5"
 	"fmt"
 	"math/rand"
 	"time"
@@ -170,4 +171,9 @@ func CreateNewId(length int) []byte {
 		da[i] = d[rand.New(rand.NewSource(time.Now().UnixNano())).Intn(15)]
 	}
 	return da
+}
+func MD5(b []byte) []byte {
+	m := md5.New()
+	m.Write(b)
+	return []byte(fmt.Sprintf("%x", m.Sum(nil)))
 }
