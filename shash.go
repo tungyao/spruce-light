@@ -1,6 +1,7 @@
 package spruce
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -149,11 +150,6 @@ func (h *Hash) Get(key []byte) interface{} {
 	}
 	return find(key, h.ver[pos])
 }
-func (h *Hash) Storage() {
-	h.rw.Lock()
-	defer h.rw.Unlock()
-	FindAll(h.ver)
-}
 
 // 重新从文件中读取到内存中来
 func (h *Hash) Reload() {
@@ -246,7 +242,7 @@ func FindAll(n []*node) []byte {
 		for t != nil {
 			if len(t.Key) != 0 {
 				// x := make([]byte, 0)
-				data += string(t.Key) + "\t\t" + fmt.Sprintf("%s", t.Value) + "\n"
+				data += hash(t.Key, t.Value, t.et)
 			}
 			t = t.next
 		}
@@ -313,4 +309,9 @@ func ReplaceTabCharacterToNormal(in []byte) []byte {
 		}
 	}
 	return in
+}
+
+func hash(key []byte, value interface{}, tm int64) string {
+	s := fmt.Sprintf("%s\t\t%s\t\t%d", key, value, tm)
+	return base64.StdEncoding.EncodeToString([]byte(s))
 }
