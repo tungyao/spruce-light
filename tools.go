@@ -7,79 +7,6 @@ import (
 	"time"
 )
 
-//func CheckConfig(nw interface{}, deft interface{}) {
-//	switch reflect.TypeOf(nw).Kind() {
-//	case reflect.Struct:
-//		t := reflect.TypeOf(nw).Elem()
-//		v := reflect.ValueOf(nw).Elem()
-//		for i := 0; i < t.NumField(); i++ {
-//			n := v.Field(i)
-//			switch n.Kind() {
-//			case reflect.String:
-//				if n.IsZero() {
-//					n.SetString(reflect.ValueOf(deft).Field(i).String())
-//				}
-//			case reflect.Int:
-//				if n.IsZero() {
-//					n.SetInt(reflect.ValueOf(deft).Field(i).Int())
-//				}
-//			case reflect.Int64:
-//				if n.IsZero() {
-//					n.SetInt(reflect.ValueOf(deft).Field(i).Int())
-//				}
-//			case reflect.Bool:
-//				if n.IsZero() {
-//					n.SetBool(reflect.ValueOf(deft).Field(i).Bool())
-//				}
-//			case reflect.Float64:
-//				if n.IsZero() {
-//					n.SetFloat(reflect.ValueOf(deft).Field(i).Float())
-//				}
-//			}
-//		}
-//	case reflect.Ptr:
-//		n := reflect.ValueOf(nw).Elem()
-//		switch n.Kind() {
-//		case reflect.Int:
-//			if n.IsZero() && n.CanSet() {
-//				n.SetInt(reflect.ValueOf(deft).Int())
-//			}
-//		case reflect.String:
-//			if n.IsZero() && n.CanSet() {
-//				n.SetString(reflect.ValueOf(deft).String())
-//			}
-//		case reflect.Struct:
-//			t := reflect.TypeOf(nw).Elem()
-//			v := reflect.ValueOf(nw).Elem()
-//			for i := 0; i < t.NumField(); i++ {
-//				n := v.Field(i)
-//				switch n.Kind() {
-//				case reflect.String:
-//					if n.IsZero() {
-//						n.SetString(reflect.ValueOf(deft).Field(i).String())
-//					}
-//				case reflect.Int:
-//					if n.IsZero() {
-//						n.SetInt(reflect.ValueOf(deft).Field(i).Int())
-//					}
-//				case reflect.Int64:
-//					if n.IsZero() {
-//						n.SetInt(reflect.ValueOf(deft).Field(i).Int())
-//					}
-//				case reflect.Bool:
-//					if n.IsZero() {
-//						n.SetBool(reflect.ValueOf(deft).Field(i).Bool())
-//					}
-//				case reflect.Float64:
-//					if n.IsZero() {
-//						n.SetFloat(reflect.ValueOf(deft).Field(i).Float())
-//					}
-//				}
-//			}
-//		}
-//
-//	}
-//}
 func SplitString(str []byte, p []byte) [][]byte {
 	group := make([][]byte, 0)
 	ps := 0
@@ -88,7 +15,7 @@ func SplitString(str []byte, p []byte) [][]byte {
 			if len(p) == 1 {
 				group = append(group, str[ps:i])
 				ps = i + len(p)
-				//return [][]byte{str[:i], str[i+1:]}
+				// return [][]byte{str[:i], str[i+1:]}
 			} else {
 				for j := 1; j < len(p); j++ {
 					if str[i+j] != p[j] || j != len(p)-1 {
@@ -97,7 +24,7 @@ func SplitString(str []byte, p []byte) [][]byte {
 						group = append(group, str[ps:i])
 						ps = i + len(p)
 					}
-					//return [][]byte{str[:i], str[i+len(p):]}
+					// return [][]byte{str[:i], str[i+len(p):]}
 				}
 			}
 		} else {
@@ -164,7 +91,7 @@ func ComplementHex(s string, x int) string {
 	return s
 }
 func CreateNewId(length int) []byte {
-	d := "abcdef012345689"
+	d := "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM012345689"
 	da := make([]byte, length)
 	for i := 0; i < length; i++ {
 		<-time.After(time.Nanosecond * 1)
