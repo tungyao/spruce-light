@@ -1,3 +1,3 @@
-module tungyao/spruce-light
+module github.com/tungyao/spruce-light
 
-go 1.18
+go 1.19
